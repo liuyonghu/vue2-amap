@@ -13,9 +13,14 @@
     "mocha": true
   },
   "globals": {
-      "AMap": true,
-      "particlesJS": true,
-      "expect": true,
-      "sinon": true
+    "AMap": true,
+    "particlesJS": true,
+    "expect": true,
+    "sinon": true
+  },
+  "rules": {
+    "quotes": 0,
+    "eqeqeq": 0,
+    "curly": 0
   }
 }

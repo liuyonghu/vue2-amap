@@ -1,36 +1,24 @@
-<p align="center">
-  <img src="https://cdn.rawgit.com/ElemeFE/vue-amap/master/src/docs/assets/images/logo.png">
-</p>
 
-# vue-amap
-[![Build Status](https://travis-ci.org/ElemeFE/vue-amap.svg?branch=master)](https://travis-ci.org/ElemeFE/vue-amap)
-[![npm package](https://img.shields.io/npm/v/vue-amap.svg)](https://www.npmjs.org/package/vue-amap)
-[![NPM downloads](http://img.shields.io/npm/dm/vue-amap.svg)](https://npmjs.org/package/vue-amap)
-![JS gzip size](http://img.badgesize.io/https://unpkg.com/vue-amap/src/lib/index.js?compression=gzip&label=gzip%20size:%20JS)
-[![license](https://img.shields.io/github/license/elemefe/vue-amap.svg?style=flat-square)](https://github.com/ElemeFE/vue-amap)
-[![GitHub stars](https://img.shields.io/github/stars/elemefe/vue-amap.svg?style=social&label=Star)](https://github.com/ElemeFE/vue-amap)
 
-> vue-amap是一套基于Vue 2.0和高德地图的地图组件。
+
+> vue2-amap是一套基于vue-amap地图组件。
 
 ## 安装
 ```
-npm install -S vue-amap
+npm install -S vue2-amap
 ```
-
-## 文档
-[https://elemefe.github.io/vue-amap](https://elemefe.github.io/vue-amap)
 
 
 ## 快速上手
 
-引入vue-amap
+引入vue2-amap
 
 ```javascript
-// 引入vue-amap
-import VueAMap from 'vue-amap';
+// 引入vue2-amap
+import VueAMap from 'vue2-amap';
 Vue.use(VueAMap);
 
-// 初始化vue-amap
+// 初始化vue2-amap
 VueAMap.initAMapApiLoader({
   // 高德的key
   key: 'YOUR_KEY',

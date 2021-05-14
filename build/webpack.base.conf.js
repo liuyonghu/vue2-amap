@@ -1,3 +1,11 @@
+/*
+ * @Author: liuyonghu
+ * @Date: 2021-05-13 09:22:35
+ * @LastEditTime: 2021-05-14 15:27:23
+ * @LastEditors: liuyonghu
+ * @Description: 
+ * @FilePath: \vue2-amap\build\webpack.base.conf.js
+ */
 var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
@@ -9,7 +17,7 @@ function resolve (dir) {
 
 module.exports = {
   entry: {
-    'vue-amap': ['./src/lib/index.js']
+    'vue-amap': './src/lib/index.js'
   },
   output: {
     path: config.build.assetsRoot,

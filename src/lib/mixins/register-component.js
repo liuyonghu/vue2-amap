@@ -1,9 +1,9 @@
-import upperCamelCase from 'uppercamelcase';
-import { commonConvertMap } from '../utils/convert-helper';
-import eventHelper from '../utils/event-helper';
-import { lazyAMapApiLoaderInstance } from '../services/injected-amap-api-instance';
-import CONSTANTS from '../utils/constant';
-import Vue2AMap  from '../';
+import upperCamelCase from "uppercamelcase";
+import { commonConvertMap } from "../utils/convert-helper";
+import eventHelper from "../utils/event-helper";
+import { lazyAMapApiLoaderInstance } from "../services/injected-amap-api-instance";
+import CONSTANTS from "../utils/constant";
+import Vue2AMap from "../";
 
 export default {
   data() {
@@ -15,7 +15,8 @@ export default {
   mounted() {
     if (lazyAMapApiLoaderInstance) {
       lazyAMapApiLoaderInstance.load().then(() => {
-        this.__contextReady && this.__contextReady.call(this, this.convertProps());
+        this.__contextReady &&
+          this.__contextReady.call(this, this.convertProps());
       });
     }
     this.$amap = this.$amap || this.$parent.$amap;
@@ -46,13 +47,19 @@ export default {
         return this.handlers[prop];
       }
 
-      return this.$amapComponent[`set${upperCamelCase(prop)}`] || this.$amapComponent.setOptions;
+      return (
+        this.$amapComponent[`set${upperCamelCase(prop)}`] ||
+        this.$amapComponent.setOptions
+      );
     },
 
     convertProps() {
       const props = {};
       if (this.$amap) props.map = this.$amap;
-      const { $options: { propsData = {} }, propsRedirect } = this;
+      const {
+        $options: { propsData = {} },
+        propsRedirect
+      } = this;
       return Object.keys(propsData).reduce((res, _key) => {
         let key = _key;
         let propsValue = this.convertSignalProp(key, propsData[key]);
@@ -64,13 +71,13 @@ export default {
     },
 
     convertSignalProp(key, sourceData) {
-      let converter = '';
-      let type = '';
+      let converter = "";
+      let type = "";
 
       if (this.amapTagName) {
         try {
-          const name = upperCamelCase(this.amapTagName).replace(/^El/, '');
-          const componentConfig = Vue2AMap [name] || '';
+          const name = upperCamelCase(this.amapTagName).replace(/^El/, "");
+          const componentConfig = Vue2AMap[name] || "";
 
           type = componentConfig.props[key].$type;
           converter = commonConvertMap[type];
@@ -93,13 +100,21 @@ export default {
       if (!this.$options.propsData) return;
       if (this.$options.propsData.events) {
         for (let eventName in this.events) {
-          eventHelper.addListener(this.$amapComponent, eventName, this.events[eventName]);
+          eventHelper.addListener(
+            this.$amapComponent,
+            eventName,
+            this.events[eventName]
+          );
         }
       }
 
       if (this.$options.propsData.onceEvents) {
         for (let eventName in this.onceEvents) {
-          eventHelper.addListenerOnce(this.$amapComponent, eventName, this.onceEvents[eventName]);
+          eventHelper.addListenerOnce(
+            this.$amapComponent,
+            eventName,
+            this.onceEvents[eventName]
+          );
         }
       }
     },
@@ -109,23 +124,29 @@ export default {
     },
 
     setPropWatchers() {
-      const { propsRedirect, $options: { propsData = {} } } = this;
+      const {
+        propsRedirect,
+        $options: { propsData = {} }
+      } = this;
 
       Object.keys(propsData).forEach(prop => {
         let handleProp = prop;
-        if (propsRedirect && propsRedirect[prop]) handleProp = propsRedirect[prop];
+        if (propsRedirect && propsRedirect[prop])
+          handleProp = propsRedirect[prop];
         let handleFun = this.getHandlerFun(handleProp);
-        if (!handleFun && prop !== 'events') return;
+        if (!handleFun && prop !== "events") return;
 
         // watch props
         const unwatch = this.$watch(prop, nv => {
-          if (prop === 'events') {
+          if (prop === "events") {
             this.unregisterEvents();
             this.registerEvents();
             return;
           }
           if (handleFun && handleFun === this.$amapComponent.setOptions) {
-            return handleFun.call(this.$amapComponent, {[handleProp]: this.convertSignalProp(prop, nv)});
+            return handleFun.call(this.$amapComponent, {
+              [handleProp]: this.convertSignalProp(prop, nv)
+            });
           }
 
           handleFun.call(this.$amapComponent, this.convertSignalProp(prop, nv));
@@ -145,12 +166,16 @@ export default {
 
     // some prop can not init by initial created methods
     initProps() {
-      const props = ['editable', 'visible'];
+      const props = ["editable", "visible"];
 
       props.forEach(propStr => {
         if (this[propStr] !== undefined) {
           const handleFun = this.getHandlerFun(propStr);
-          handleFun && handleFun.call(this.$amapComponent, this.convertSignalProp(propStr, this[propStr]));
+          handleFun &&
+            handleFun.call(
+              this.$amapComponent,
+              this.convertSignalProp(propStr, this[propStr])
+            );
         }
       });
 
@@ -171,8 +196,10 @@ export default {
     },
 
     register() {
-      const res = this.__initComponent && this.__initComponent(this.convertProps());
-      if (res && res.then) res.then((instance) => this.registerRest(instance));  // promise
+      const res =
+        this.__initComponent && this.__initComponent(this.convertProps());
+      if (res && res.then) res.then(instance => this.registerRest(instance));
+      // promise
       else this.registerRest(res);
     },
 
@@ -183,7 +210,12 @@ export default {
       this.setPropWatchers();
       this.registerToManager();
 
-      if (this.events && this.events.init) this.events.init(this.$amapComponent, this.$amap, this.amapManager || this.$parent.amapManager);
+      if (this.events && this.events.init)
+        this.events.init(
+          this.$amapComponent,
+          this.$amap,
+          this.amapManager || this.$parent.amapManager
+        );
     },
 
     // helper method

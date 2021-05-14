@@ -5,7 +5,7 @@
 如果需要坐标转地址服务，也就是下面用到的 `Geocoder` ，请注意在地图初始化的时候要记得引入：
 
 ```javascript
-window.VueAMap.initAMapApiLoader({
+window.Vue2AMap .initAMapApiLoader({
   key: 'YOUR_CODE',
   plugin: [... 'Geocoder']
 });

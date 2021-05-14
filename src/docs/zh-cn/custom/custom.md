@@ -32,7 +32,7 @@
   </style>
   <script>
     // import {createCustomComponent} from 'vue-amap' 
-    const { createCustomComponent } = VueAMap;
+    const { createCustomComponent } = Vue2AMap ;
     // 组件定义
     const AmapCanvasMarkers = createCustomComponent({
       name: 'amap-canvas-marker',
@@ -178,7 +178,7 @@
 
 <script>
 
-const customMapSearchbox = VueAMap.createCustomComponent({
+const customMapSearchbox = Vue2AMap .createCustomComponent({
   props: {
     input: String
   },
@@ -264,7 +264,7 @@ module.exports = {
 </template>
 
 <script>
-const customSearch = VueAMap.createCustomComponent({
+const customSearch = Vue2AMap .createCustomComponent({
   template: `<div class="tip">
     <input class="custom-componet-input" :id="id" />
   </div>`,

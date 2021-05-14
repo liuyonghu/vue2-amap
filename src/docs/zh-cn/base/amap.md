@@ -29,7 +29,7 @@
     // NPM 方式
     // import { AMapManager } from 'vue-amap';
     // CDN 方式
-    let amapManager = new VueAMap.AMapManager();
+    let amapManager = new Vue2AMap .AMapManager();
     module.exports = {
       data: function() {
         return {

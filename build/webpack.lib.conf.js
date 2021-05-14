@@ -34,7 +34,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     path: config.lib_build.assetsRoot,
     filename: "index.js",
     chunkFilename: "index.js",
-    library: "VueAMap",
+    library: "Vue2AMap ",
     libraryTarget: "umd",
     umdNamedDefine: true
   },

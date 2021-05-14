@@ -40,7 +40,7 @@ npm install vue-amap --save
   <script src="https://unpkg.com/vue-amap/dist/index.js"></script>
   <script>
     // 初始化高德地图的 key 和插件
-    window.VueAMap.initAMapApiLoader({
+    window.Vue2AMap .initAMapApiLoader({
       key: 'YOUR_KEY',
       plugin: ['Autocomplete', 'PlaceSearch', 'Scale', 'OverView', 'ToolBar', 'MapType', 'PolyEditor', 'AMap.CircleEditor'],
       // 默认高德 sdk 版本为 1.4.4

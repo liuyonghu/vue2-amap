@@ -23,7 +23,7 @@
   </style>
 
   <script>
-    let amapManager = new VueAMap.AMapManager();
+    let amapManager = new Vue2AMap .AMapManager();
     module.exports = {
       data () {
         return {

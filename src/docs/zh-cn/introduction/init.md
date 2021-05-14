@@ -9,10 +9,10 @@
 NPM 安装：
 
 ```javascript
-import VueAMap from 'vue-amap';
+import Vue2AMap  from 'vue-amap';
 
-Vue.use(VueAMap);
-VueAMap.initAMapApiLoader({
+Vue.use(Vue2AMap );
+Vue2AMap .initAMapApiLoader({
   key: 'YOUR_KEY',
   plugin: ['AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType',...],
   v: '1.4.4'
@@ -22,7 +22,7 @@ VueAMap.initAMapApiLoader({
 CDN 引入：
 
 ```javascript
-window.VueAMap.initAMapApiLoader({
+window.Vue2AMap .initAMapApiLoader({
   key: 'YOUR_KEY',
   plugin: ['AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType',...],
   v: '1.4.4'
@@ -36,11 +36,11 @@ window.VueAMap.initAMapApiLoader({
 NPM 安装：
 
 ```javascript
-import VueAMap from 'vue-amap';
+import Vue2AMap  from 'vue-amap';
 import { lazyAMapApiLoaderInstance } from 'vue-amap';
 
-Vue.use(VueAMap);
-VueAMap.initAMapApiLoader({
+Vue.use(Vue2AMap );
+Vue2AMap .initAMapApiLoader({
   key: 'YOUR_KEY',
   plugin: ['AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType',...],
   uiVersion: '1.0' // ui库版本，不配置不加载,
@@ -58,13 +58,13 @@ lazyAMapApiLoaderInstance.load().then(() => {
 CDN 引入：
 
 ```javascript
-window.VueAMap.initAMapApiLoader({
+window.Vue2AMap .initAMapApiLoader({
   key: 'YOUR_KEY',
   plugin: ['AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType',...],
   v: '1.4.4'
 });
 
-window.VueAMap.lazyAMapApiLoaderInstance.load().then(() => {
+window.Vue2AMap .lazyAMapApiLoaderInstance.load().then(() => {
   // your code ...
   this.map = new AMap.Map('amapContainer', {
     center: new AMap.LngLat(121.59996, 31.197646)

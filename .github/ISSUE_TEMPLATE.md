@@ -3,7 +3,7 @@
 
 ## 问题
 
-### VueAMap 版本
+### Vue2AMap  版本
 
 ### OS/Browsers version
 

@@ -5,7 +5,7 @@
   注：官方组件库出来不久，暂时不会封装。
 
 ```javascript
-VueAMap.initAMapApiLoader({
+Vue2AMap .initAMapApiLoader({
   key: 'YOUR_KEY',
   plugin: ['AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType',...],
   uiVersion: '1.0.11' // 版本号
@@ -36,7 +36,7 @@ VueAMap.initAMapApiLoader({
     // NPM 方式
     // import { AMapManager } from 'vue-amap';
     // CDN 方式
-    let amapManager = new VueAMap.AMapManager();
+    let amapManager = new Vue2AMap .AMapManager();
     module.exports = {
       data: function() {
         return {
@@ -77,7 +77,7 @@ VueAMap.initAMapApiLoader({
     // NPM 方式
     // import { lazyAMapApiLoaderInstance } from 'vue-amap';
     // CDN 方式
-    const loadPromise = window.VueAMap.lazyAMapApiLoaderInstance.load()
+    const loadPromise = window.Vue2AMap .lazyAMapApiLoaderInstance.load()
     module.exports = {
       mounted() {
         loadPromise.then(() => {

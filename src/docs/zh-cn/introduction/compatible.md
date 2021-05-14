@@ -13,7 +13,7 @@
 
 *若涉及到高德原生 `AMap` 需要注意的点：*
 
-* 确保 `vue-amap` 的导入名不是 `AMap`，推荐 `import VueAMap from 'vue-amap'` 避免和高德全局的 `AMap` 冲突。
+* 确保 `vue-amap` 的导入名不是 `AMap`，推荐 `import Vue2AMap  from 'vue-amap'` 避免和高德全局的 `AMap` 冲突。
 * 若 `eslint` 报错 `AMap is undefined` 之类的错误。请将 `AMap` 配置到 `.eslintrc` 的 `globals` 中。
 
 <vuep template="#example"></vuep>
@@ -41,7 +41,7 @@
     // NPM 方式
     // import { AMapManager } from 'vue-amap';
     // CDN 方式
-    let amapManager = new VueAMap.AMapManager();
+    let amapManager = new Vue2AMap .AMapManager();
     module.exports = {
       data: function() {
         return {

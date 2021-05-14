@@ -3,7 +3,7 @@ import { commonConvertMap } from '../utils/convert-helper';
 import eventHelper from '../utils/event-helper';
 import { lazyAMapApiLoaderInstance } from '../services/injected-amap-api-instance';
 import CONSTANTS from '../utils/constant';
-import VueAMap from '../';
+import Vue2AMap  from '../';
 
 export default {
   data() {
@@ -70,7 +70,7 @@ export default {
       if (this.amapTagName) {
         try {
           const name = upperCamelCase(this.amapTagName).replace(/^El/, '');
-          const componentConfig = VueAMap[name] || '';
+          const componentConfig = Vue2AMap [name] || '';
 
           type = componentConfig.props[key].$type;
           converter = commonConvertMap[type];

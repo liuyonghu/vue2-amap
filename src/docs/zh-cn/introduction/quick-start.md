@@ -134,11 +134,11 @@ if (process.env.NODE_ENV === 'production') {
 main.js
 ```javascript
 import Vue from 'vue';
-import VueAMap from 'vue-amap';
+import Vue2AMap  from 'vue-amap';
 import App from './App.vue';
 
-Vue.use(VueAMap);
-VueAMap.initAMapApiLoader({
+Vue.use(Vue2AMap );
+Vue2AMap .initAMapApiLoader({
   key: 'your amap key',
   plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor'],
   // 默认高德 sdk 版本为 1.4.4

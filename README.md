@@ -15,11 +15,11 @@ npm install -S vue2-amap
 
 ```javascript
 // 引入vue2-amap
-import VueAMap from 'vue2-amap';
-Vue.use(VueAMap);
+import Vue2AMap  from 'vue2-amap';
+Vue.use(Vue2AMap );
 
 // 初始化vue2-amap
-VueAMap.initAMapApiLoader({
+Vue2AMap .initAMapApiLoader({
   // 高德的key
   key: 'YOUR_KEY',
   // 插件集合

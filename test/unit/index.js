@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import VueAMap from 'vue-amap';
+import Vue2AMap  from 'vue-amap';
 import { initAMap } from './utils';
-Vue.use(VueAMap);
+Vue.use(Vue2AMap );
 initAMap();
 
 Vue.config.productionTip = false;

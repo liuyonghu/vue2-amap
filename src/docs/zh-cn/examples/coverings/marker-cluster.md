@@ -3,9 +3,9 @@
 引入插件
 
 ```
-import VueAMap from 'vue-amap';
+import Vue2AMap  from 'vue-amap';
 
-VueAMap.initAMapApiLoader({
+Vue2AMap .initAMapApiLoader({
   key: 'YOUR CODE',
   plugin: [..., 'MarkerClusterer']
 });

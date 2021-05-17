@@ -1,7 +1,7 @@
 /*
  * @Author: liuyonghu
  * @Date: 2021-05-13 09:22:35
- * @LastEditTime: 2021-05-14 15:41:01
+ * @LastEditTime: 2021-05-17 12:40:46
  * @LastEditors: liuyonghu
  * @Description:
  * @FilePath: \vue2-amap\build\lib.js
@@ -9,7 +9,7 @@
 // https://github.com/shelljs/shelljs
 require("./check-versions")();
 require("shelljs/global");
-process.env.NODE_ENV = "production";
+// console.log(" -- -- - LIB_ENV  -- ", process.env.NODE_ENV);
 // var path = require('path');
 // var config = require('../config');
 var ora = require("ora");

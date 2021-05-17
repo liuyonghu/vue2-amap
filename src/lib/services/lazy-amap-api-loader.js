@@ -45,15 +45,14 @@ export default class AMapAPILoader {
     const mapKeys = Object.keys(this._window.AMap).map(it => {
       return it.toUpperCase();
     });
-
+    console.log("desPlugins -- ", desPlugins, "   mapKeys -- ", mapKeys);
+    const diffPlugins = [];
     desPlugins.forEach(it => {
-      const has = mapKeys.some(itt => {
-        return itt.indexOf(it) >= 0;
+      mapKeys.some(itt => {
+        if (itt.indexOf(it) < 0) {
+          diffPlugins.push(it);
+        }
       });
-      if (!has) {
-        return true;
-      }
-      return false;
     });
 
     // const desKeys =
@@ -65,14 +64,16 @@ export default class AMapAPILoader {
     if (this._window.AMap && this._window.AMap.Map) {
       return this.loadUIAMap();
     }
-    if (!this[NEED_RELOAD]()) {
-      if (this._scriptLoadingPromise) return this._scriptLoadingPromise;
-    }
+    const diffPlugins = this[NEED_RELOAD]();
+    console.log("diffPlugins -- ", diffPlugins);
+
+    if (this._scriptLoadingPromise) return this._scriptLoadingPromise;
 
     const script = this._document.createElement("script");
     script.type = "text/javascript";
     script.async = true;
     script.defer = true;
+    script.className = "vue2amap";
     script.src = this._getScriptSrc();
 
     const UIPromise = this._config.uiVersion ? this.loadUIAMap() : null;

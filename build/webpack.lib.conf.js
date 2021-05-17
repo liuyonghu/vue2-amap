@@ -4,31 +4,31 @@ const config = require("../config");
 const merge = require("webpack-merge");
 const baseWebpackConfig = require("./webpack.base.conf");
 
-// 
+//
 // const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-// 
-const rules = utils.styleLoaders({
-  sourceMap: false,
-//   extract: false
-});
+//
 
+const rules = utils.styleLoaders({
+  sourceMap: false
+  //   extract: false
+});
+const plugins =
+  process.env.NODE_ENV == "development"
+    ? []
+    : [
+        new webpack.optimize.UglifyJsPlugin({
+          compress: {
+            warnings: false
+          },
+          sourceMap: true
+        })
+      ];
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
     rules
   },
-  plugins: [
-    // new ExtractTextPlugin({
-    //     // filename: utils.assetsPath('css/[name].[contenthash].css')
-    //   filename: utils.assetsPath("[name]/styles.[contenthash].css")
-    // }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      sourceMap: true
-    })
-  ],
+  plugins: plugins,
   devtool: config.lib_build.productionSourceMap ? "#source-map" : false,
   output: {
     path: config.lib_build.assetsRoot,

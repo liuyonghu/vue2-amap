@@ -5,12 +5,12 @@ const merge = require("webpack-merge");
 const baseWebpackConfig = require("./webpack.base.conf");
 
 // 
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+// const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 // 
 const rules = utils.styleLoaders({
   sourceMap: false,
-  extract: false
+//   extract: false
 });
 
 const webpackConfig = merge(baseWebpackConfig, {
@@ -18,10 +18,10 @@ const webpackConfig = merge(baseWebpackConfig, {
     rules
   },
   plugins: [
-    new ExtractTextPlugin({
-      //   filename: utils.assetsPath('css/[name].[contenthash].css')
-      filename: utils.assetsPath("[name]/styles.[contenthash].css")
-    }),
+    // new ExtractTextPlugin({
+    //     // filename: utils.assetsPath('css/[name].[contenthash].css')
+    //   filename: utils.assetsPath("[name]/styles.[contenthash].css")
+    // }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false

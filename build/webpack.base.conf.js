@@ -1,7 +1,7 @@
 /*
  * @Author: liuyonghu
  * @Date: 2021-05-13 09:22:35
- * @LastEditTime: 2021-05-17 10:28:46
+ * @LastEditTime: 2021-05-17 10:32:32
  * @LastEditors: liuyonghu
  * @Description:
  * @FilePath: \vue2-amap\build\webpack.base.conf.js
@@ -30,7 +30,6 @@ module.exports = {
     library: "Vue2AMap ",
     libraryTarget: "umd",
     libraryExport: "default",
-    scriptType: "module",
     umdNamedDefine: true
   },
   resolve: {

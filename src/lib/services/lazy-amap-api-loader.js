@@ -54,11 +54,7 @@ export default class AMapAPILoader {
         }
       });
     });
-
-    // const desKeys =
-    // for (const iterator of Object.keys(this._window.AMap)) {
-    //   let uiterator = iterator.toUpperCase();
-    // }
+    return diffPlugins;
   }
   load() {
     if (this._window.AMap && this._window.AMap.Map) {

@@ -45,8 +45,8 @@ export default class AMapAPILoader {
     const mapKeys = Object.keys(this._window.AMap).map(it => {
       return it.toUpperCase();
     });
-    console.log("desPlugins -- ", desPlugins, "   mapKeys -- ", mapKeys);
-    const diffPlugins = [];
+    console.log("desPlugins -- ", desPlugins, "\n   mapKeys -- ", mapKeys);
+    let diffPlugins = [];
     desPlugins.forEach(it => {
       mapKeys.some(itt => {
         if (itt.indexOf(it) < 0) {
@@ -57,11 +57,12 @@ export default class AMapAPILoader {
     return diffPlugins;
   }
   load() {
+    const diffPlugins = this[NEED_RELOAD]();
+    console.log("diffPlugins -- ", diffPlugins);
+
     if (this._window.AMap && this._window.AMap.Map) {
       return this.loadUIAMap();
     }
-    const diffPlugins = this[NEED_RELOAD]();
-    console.log("diffPlugins -- ", diffPlugins);
 
     if (this._scriptLoadingPromise) return this._scriptLoadingPromise;
 

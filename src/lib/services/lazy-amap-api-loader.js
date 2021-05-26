@@ -9,10 +9,10 @@ const DEFAULT_AMP_CONFIG = {
 };
 const NEED_RELOAD = Symbol("needReload");
 const DEFAULT_PULGINS = [
-  "Autocomplete",
-  "PlaceSearch",
-  "PolyEditor",
-  "CircleEditor"
+  "AMap.Autocomplete",
+  "AMap.PlaceSearch",
+  "AMap.PolyEditor",
+  "AMap.CircleEditor"
 ];
 export default class AMapAPILoader {
   /**
@@ -30,38 +30,64 @@ export default class AMapAPILoader {
   }
   [NEED_RELOAD]() {
     if (!this._window.AMap || !this._window.AMap.Map) {
-      return true;
+      return {
+        loaded: false,
+        diff: false
+      };
     }
-    const configPlugin = this._config.plugin.map(it => {
-      if (it.indexOf("AMap.") == 0) {
-        return it.split("AMap.")[1];
-      } else {
-        return it;
+    const configPlugin = this._config.plugin;
+    const tempPlugins = DEFAULT_PULGINS.concat(configPlugin);
+    const desPlugins = [];
+    tempPlugins.forEach(it => {
+      if (!desPlugins.includes(it)) {
+        desPlugins.push(it);
       }
     });
-    const desPlugins = DEFAULT_PULGINS.concat(configPlugin).map(it => {
-      return it.toUpperCase();
-    });
     const mapKeys = Object.keys(this._window.AMap).map(it => {
-      return it.toUpperCase();
+      it = `AMap.${it}`;
+      return it;
     });
-    console.log("desPlugins -- ", desPlugins, "\n   mapKeys -- ", mapKeys);
-    let diffPlugins = [];
-    desPlugins.forEach(it => {
-      mapKeys.some(itt => {
-        if (itt.indexOf(it) < 0) {
-          diffPlugins.push(it);
+    // console.log("desPlugins -- ", desPlugins, "\n   mapKeys -- ", mapKeys);
+    let diffPlugins = [...desPlugins];
+    desPlugins.forEach((it, i) => {
+      mapKeys.forEach(itt => {
+        if (itt == it) {
+          diffPlugins.splice(i, 1);
         }
       });
     });
-    return diffPlugins;
+    return {
+      loaded: true,
+      diff: desPlugins.length > 0,
+      plugins: desPlugins
+    };
   }
   load() {
-    const diffPlugins = this[NEED_RELOAD]();
-    console.log("diffPlugins -- ", diffPlugins);
+    const res = this[NEED_RELOAD]();
 
-    if (this._window.AMap && this._window.AMap.Map) {
+    const UIPromise = this._config.uiVersion ? this.loadUIAMap() : null;
+
+    if (res.loaded === true && res.diff === false) {
       return this.loadUIAMap();
+    }
+    if (res.loaded === true && res.diff === true) {
+      this._scriptLoadingPromise = new Promise((resolve, reject) => {
+        this._window.AMap.plugin(res.plugins, () => {
+          while (this._queueEvents.length) {
+            this._queueEvents.pop().apply();
+          }
+          if (UIPromise) {
+            UIPromise.then(() => {
+              window.initAMapUI();
+              setTimeout(resolve);
+            });
+          } else {
+            return resolve();
+          }
+        });
+      });
+
+      return this._scriptLoadingPromise;
     }
 
     if (this._scriptLoadingPromise) return this._scriptLoadingPromise;
@@ -72,8 +98,6 @@ export default class AMapAPILoader {
     script.defer = true;
     script.className = "vue2amap";
     script.src = this._getScriptSrc();
-
-    const UIPromise = this._config.uiVersion ? this.loadUIAMap() : null;
 
     this._scriptLoadingPromise = new Promise((resolve, reject) => {
       this._window["amapInitComponent"] = () => {
@@ -127,8 +151,6 @@ export default class AMapAPILoader {
 
   _getScriptSrc() {
     // amap plugin prefix reg
-    const amap_prefix_reg = /^AMap./;
-
     const config = this._config;
     const paramKeys = ["v", "key", "plugin", "callback"];
 
@@ -136,20 +158,7 @@ export default class AMapAPILoader {
     if (config.plugin && config.plugin.length > 0) {
       // push default types
       config.plugin = config.plugin.concat(DEFAULT_PULGINS);
-
-      const plugins = [];
-
-      // fixed plugin name compatibility.
-      config.plugin.forEach(item => {
-        const prefixName = amap_prefix_reg.test(item) ? item : "AMap." + item;
-        const pureName = prefixName.replace(amap_prefix_reg, "");
-
-        plugins.push(prefixName, pureName);
-      });
-
-      config.plugin = plugins;
     }
-
     const params = Object.keys(config)
       .filter(k => ~paramKeys.indexOf(k))
       .filter(k => config[k] != null)
